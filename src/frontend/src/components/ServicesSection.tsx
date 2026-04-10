@@ -279,7 +279,7 @@ export function ServicesSection() {
                             Contact on Instagram
                           </a>
                           <a
-                            href="https://wa.me/916378489833"
+                            href="https://wa.me/916378489833?text=Heyy%0AI%20saw%20Prep2Seat%2C%20can%20you%20guide%20me%3F"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-muted transition-smooth text-foreground text-sm font-medium"

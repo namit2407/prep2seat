@@ -129,7 +129,7 @@ export function ContactSection() {
                     counseling queries, and program details.
                   </p>
                   <a
-                    href="https://wa.me/916378489833"
+                    href="https://wa.me/916378489833?text=Heyy%0AI%20saw%20Prep2Seat%2C%20can%20you%20guide%20me%3F"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
