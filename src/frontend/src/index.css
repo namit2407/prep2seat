@@ -168,6 +168,11 @@
     box-shadow: 0 4px 16px -4px oklch(var(--accent) / 0.35);
   }
 
+  .shadow-gold-glow {
+    box-shadow: 0 0 24px 4px oklch(var(--accent) / 0.25), 0 4px 16px -4px
+      oklch(var(--accent) / 0.4);
+  }
+
   .gradient-instagram {
     background: linear-gradient(
       135deg,
@@ -220,6 +225,37 @@
     animation: slide-up 0.6s ease-out both;
   }
 
+  /* Gold shimmer on accent text */
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      oklch(0.68 0.24 52) 0%,
+      oklch(0.82 0.28 60) 40%,
+      oklch(0.68 0.24 52) 60%,
+      oklch(0.72 0.2 45) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+
+  /* Gentle pulse for pricing tags */
+  .animate-pulse-gold {
+    animation: pulse-gold 2.5s ease-in-out infinite;
+  }
+
+  /* Scroll indicator bounce */
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+
+  /* Star pop-in */
+  .animate-star {
+    animation: star-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
   .section-divider {
     height: 3px;
     width: 48px;
@@ -229,5 +265,98 @@
       oklch(var(--accent) / 0.4) 100%
     );
     border-radius: 999px;
+  }
+}
+
+/* ─── Keyframes ──────────────────────────────────────────── */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+@keyframes pulse-gold {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.68 0.24 52 / 0);
+  }
+  50% {
+    box-shadow: 0 0 0 6px oklch(0.68 0.24 52 / 0.18);
+  }
+}
+
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes star-pop {
+  from {
+    transform: scale(0) rotate(-20deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes section-divider-grow {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 48px;
+    opacity: 1;
+  }
+}
+
+/* ─── Reduced Motion ─────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-shimmer,
+  .animate-pulse-gold,
+  .animate-bounce-slow,
+  .animate-bounce,
+  .animate-star,
+  .animate-fade-in,
+  .animate-slide-up {
+    animation: none !important;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

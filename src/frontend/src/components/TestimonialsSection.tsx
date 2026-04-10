@@ -24,11 +24,26 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-function StarRating() {
+const spring = { type: "spring" as const, stiffness: 260, damping: 22 };
+
+function AnimatedStars() {
   return (
     <div className="flex gap-0.5">
-      {["s1", "s2", "s3", "s4", "s5"].map((k) => (
-        <Star key={k} size={13} className="text-accent fill-current" />
+      {["s1", "s2", "s3", "s4", "s5"].map((k, i) => (
+        <motion.span
+          key={k}
+          initial={{ opacity: 0, scale: 0, rotate: -20 }}
+          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 14,
+            delay: i * 0.07,
+          }}
+        >
+          <Star size={13} className="text-accent fill-current" />
+        </motion.span>
       ))}
     </div>
   );
@@ -40,13 +55,19 @@ export function TestimonialsSection() {
       <div className="container max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="flex flex-col items-center text-center gap-4 mb-16"
         >
-          <div className="section-divider" />
+          <motion.div
+            className="section-divider"
+            initial={{ width: 0, opacity: 0 }}
+            whileInView={{ width: 48, opacity: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          />
           <h2 className="font-display font-bold text-4xl sm:text-5xl text-foreground">
             Student Success Stories
           </h2>
@@ -56,27 +77,29 @@ export function TestimonialsSection() {
           </p>
         </motion.div>
 
-        {/* Testimonial cards */}
+        {/* Testimonial cards — alternating left/right slide */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {testimonials.map((t, index) => (
             <motion.div
               key={t.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ ...spring, delay: index * 0.15 }}
             >
               <Card
-                className="h-full shadow-elevated border-border hover:shadow-gold transition-smooth relative overflow-hidden"
+                className="h-full shadow-elevated border-border hover:shadow-gold transition-smooth relative overflow-hidden group"
                 data-ocid={`testimonial-${t.id}`}
               >
-                {/* Decorative quote */}
-                <div
+                {/* Decorative quote — rotates on hover */}
+                <motion.div
                   className="absolute top-4 right-5 text-accent/10 pointer-events-none"
+                  whileHover={{ rotate: 10, scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
                   aria-hidden="true"
                 >
                   <Quote size={80} strokeWidth={1} />
-                </div>
+                </motion.div>
 
                 <CardContent className="p-8 flex flex-col gap-5 relative z-10">
                   {/* Logo */}
@@ -86,8 +109,8 @@ export function TestimonialsSection() {
                     className="h-10 object-contain object-left"
                   />
 
-                  {/* Stars */}
-                  <StarRating />
+                  {/* Stars — animate in one by one */}
+                  <AnimatedStars />
 
                   {/* Quote */}
                   <blockquote className="text-foreground text-[15px] leading-relaxed font-body italic flex-1">
@@ -99,11 +122,19 @@ export function TestimonialsSection() {
 
                   {/* Attribution */}
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-full gradient-primary flex items-center justify-center shadow-subtle shrink-0">
+                    <motion.div
+                      className="w-11 h-11 rounded-full gradient-primary flex items-center justify-center shadow-subtle shrink-0"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 15,
+                      }}
+                    >
                       <span className="text-white font-display font-bold text-sm">
                         {t.initials}
                       </span>
-                    </div>
+                    </motion.div>
                     <div className="min-w-0">
                       <p className="font-display font-bold text-foreground leading-tight">
                         {t.name}
@@ -121,10 +152,10 @@ export function TestimonialsSection() {
 
         {/* Trust band */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ ...spring, delay: 0.25 }}
           className="mt-14 rounded-2xl gradient-primary p-8 text-center flex flex-col gap-3"
         >
           <p className="font-display font-bold text-2xl text-white">
