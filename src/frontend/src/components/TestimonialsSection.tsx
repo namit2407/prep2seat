@@ -159,10 +159,10 @@ export function TestimonialsSection() {
           className="mt-14 rounded-2xl gradient-primary p-8 text-center flex flex-col gap-3"
         >
           <p className="font-display font-bold text-2xl text-white">
-            Join 500+ students who secured their dream medical seat
+            Joined by 500+ students who secured their dream medical seat
           </p>
           <p className="text-white/75 text-sm max-w-md mx-auto">
-            From AIR 1 to AIR 10,000 — every rank can be converted into the
+            From AIR 1 to AIR 30,000 — every rank can be converted into the
             right seat with expert counseling.
           </p>
         </motion.div>

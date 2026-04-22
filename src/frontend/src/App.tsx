@@ -4,6 +4,7 @@ import { Header } from "./components/Header";
 import { HeroSection } from "./components/HeroSection";
 import { ServicesSection } from "./components/ServicesSection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <ContactSection />
       </main>
       <Footer />
+      <ThemeToggle />
     </div>
   );
 }
